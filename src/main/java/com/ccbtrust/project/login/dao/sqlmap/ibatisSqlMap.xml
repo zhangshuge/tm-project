@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="IbatisSqlMap">
+	<insert id="insert" parameterClass="java.util.Map">
+		INSERT INTO t_seq_temp seq VALUES (#seq#)
+	</insert>
+	<update id="update" parameterClass="java.util.Map">
+		UPDATE t_seq_temp t SET t.seq=#after# WHERE t.seq=#before#
+	</update>
+	<select id="find" resultClass="java.util.HashMap">
+		select * from t_seq_temp
+	</select>
+	<select id="find_count" resultClass="Integer">
+		select count(1) from t_seq_temp
+	</select>
+</sqlMap>

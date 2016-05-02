@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig
+PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<properties resource="jdbc.properties"/>
+	<!--useStatementNamespaces:启用命名空间
+		cacheModelsEnabled：启用缓存机制
+		enhancementEnabled：启用字节码增强机制
+		lazyLoadingEnabled：启用延迟加载机制
+		maxRequests：最大并发请求数 
+		maxSessions：最大Session数
+		maxTransactions：最大并发事务数 
+	-->
+	<settings useStatementNamespaces="true"
+		cacheModelsEnabled="true"
+		enhancementEnabled="true"
+		lazyLoadingEnabled="true"
+		maxRequests="64"
+		maxSessions="20"
+		maxTransactions="10"/>
+	<transactionManager type="JDBC">
+		<dataSource type="com.ccbtrust.ibatis.datasource.C3p0DataSourceFactory">
+			<property name="driverClass" value="${driverClassName}" />
+			<property name="jdbcUrl" value="${url}" />
+			<property name="user" value="${username}" />
+			<property name="password" value="${password}" />
+			<property name="minPoolSize" value="${minPoolSize}" />
+			<property name="initialPoolSize" value="${initialPoolSize}" />
+			<property name="maxPoolSize" value="${maxPoolSize}" />
+			<property name="acquireIncrement" value="${acquireIncrement}" />
+			<property name="checkoutTimeout" value="${checkoutTimeout}" />
+			<property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}" />
+			<property name="acquireRetryDelay" value="${acquireRetryDelay}" />
+            <property name="acquireRetryAttempts" value="${acquireRetryAttempts}" />
+            <property name="maxIdleTime" value="${maxIdleTime}" />
+            <property name="connectionTesterClassName" value="com.mchange.v2.c3p0.impl.DefaultConnectionTester" />
+            <property name="preferredTestQuery" value="select sysdate from dual" />			
+		</dataSource>
+	</transactionManager>
+	<sqlMap resource="com/ccbtrust/project/login/dao/sqlmap/logingSqlMap.xml"/>
+	<sqlMap resource="com/ccbtrust/project/login/dao/sqlmap/ibatisSqlMap.xml"/>
+</sqlMapConfig>
